@@ -23,20 +23,14 @@ find . -name '*.bak' -delete
 git add *
 git commit -m "Rename to ${COMPANY_NAME}.${PROJ_NAME}"
 # 修改服务端相关文件
-sed -i.bak "s/mini-api/${CONTEXT_ROOT}/g" ./src/Entry/Properties/launchSettings.json
-grep Beginor.MiniApi -rl src --include *.cs | xargs sed -i.bak "s/Beginor\.MiniApi/${SERVER_PREFIX}/g"
-grep Beginor.MiniApi -rl src --include *.hbm.xml | xargs sed -i.bak "s/Beginor\.MiniApi/${SERVER_PREFIX}/g"
-grep Beginor.MiniApi -rl src --include *.config | xargs sed -i.bak "s/Beginor\.MiniApi/${SERVER_PREFIX}/g"
-grep Beginor.MiniApi -rl src --include *.config | xargs sed -i.bak "s/Beginor\.MiniApi/${SERVER_PREFIX}/g"
-grep Beginor.MiniApi -rl src --include *.csproj | xargs sed -i.bak "s/Beginor\.MiniApi/${SERVER_PREFIX}/g"
-grep Beginor.MiniApi -rl test --include *.cs | xargs sed -i.bak "s/Beginor\.MiniApi/${SERVER_PREFIX}/g"
-grep Beginor.MiniApi -rl test --include *.csproj | xargs sed -i.bak "s/Beginor\.MiniApi/${SERVER_PREFIX}/g"
+sed -i.bak "s/mini-api/${CONTEXT_ROOT}/g" ./src/Api/Properties/launchSettings.json
+grep Beginor.MiniApi -rl . --include *.cs | xargs sed -i.bak "s/Beginor\.MiniApi/${SERVER_PREFIX}/g"
+grep Beginor.MiniApi -rl . --include *.hbm.xml | xargs sed -i.bak "s/Beginor\.MiniApi/${SERVER_PREFIX}/g"
+grep Beginor.MiniApi -rl . --include *.config | xargs sed -i.bak "s/Beginor\.MiniApi/${SERVER_PREFIX}/g"
+grep Beginor.MiniApi -rl . --include *.csproj | xargs sed -i.bak "s/Beginor\.MiniApi/${SERVER_PREFIX}/g"
 
-sed -i.bak "s/MiniApi/${PROJ_NAME}/g" ./src/Entry/Entry.csproj
-sed -i.bak "s/MiniApi/${PROJ_NAME}/g" ./src/Entry/Startup.Swagger.cs
-sed -i.bak "s/MiniApi/${PROJ_NAME}/g" ./src/Data/Repositories/AppStorageRepository.cs
-sed -i.bak "s/MiniApi/${PROJ_NAME}/g" ./src/Entry/config/hibernate.config
-sed -i.bak "s/MiniApi/${PROJ_NAME}/g" ./src/Entry/config/log.config
+sed -i.bak "s/MiniApi/${PROJ_NAME}/g" ./src/Api/config/hibernate.config
+sed -i.bak "s/MiniApi/${PROJ_NAME}/g" ./src/Api/config/log.config
 
 sed -i.bak "s/MiniApi/${PROJ_NAME}/g" ./smartcode.yml
 sed -i.bak "s/Beginor/${COMPANY_NAME}/g" ./smartcode.yml
@@ -49,13 +43,7 @@ git add -f ./.vscode/launch.json
 git add -f ./.vscode/tasks.json
 git commit --amend -m "Rename to ${COMPANY_NAME}.${PROJ_NAME}"
 # 移动文件至新的目录
-git mv MiniApi.slnx ${PROJ_NAME}.slnx
-# 提交一下服务端文件
-git add *
-git commit --amend -m "Rename to ${COMPANY_NAME}.${PROJ_NAME}"
-grep MiniApi -rl server --include *.csproj | xargs sed -i.bak "s/MiniApi/${PROJ_NAME}/g"
-# 删除备份文件
-find . -name '*.bak' -delete
+git mv mini-api.slnx ${PROJ_NAME}.slnx
 # 提交一下服务端文件
 git add *
 git commit --amend -m "Rename to ${COMPANY_NAME}.${PROJ_NAME}"
