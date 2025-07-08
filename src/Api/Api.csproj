@@ -6,6 +6,7 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <AssemblyName>Beginor.MiniApi</AssemblyName>
     <RootNamespace>Beginor.MiniApi</RootNamespace>
+    <StaticWebAssetsEnabled>false</StaticWebAssetsEnabled>
   </PropertyGroup>
 
   <ItemGroup>
