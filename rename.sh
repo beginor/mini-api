@@ -1,11 +1,11 @@
 #!/bin/bash -e
 
 # 公司名称
-COMPANY_NAME=MyCompany
+COMPANY_NAME=Company
 # 服务端项目名称
-PROJ_NAME=TplApp
+PROJ_NAME=AppName
 # 部署虚拟目录
-CONTEXT_ROOT=tpl-app
+CONTEXT_ROOT=app
 # 新的服务端项目前缀（公司名称+项目名称, 特殊符号需要用 \ 进行转义）
 SERVER_PREFIX="${COMPANY_NAME}.${PROJ_NAME}"
 # 修改 Docker 编译/部署文件
@@ -34,11 +34,12 @@ sed -i.bak "s/MiniApi/${PROJ_NAME}/g" ./src/Api/config/log.config
 
 sed -i.bak "s/MiniApi/${PROJ_NAME}/g" ./smartcode.yml
 sed -i.bak "s/Beginor/${COMPANY_NAME}/g" ./smartcode.yml
+sed -i.bak "s/mini-api/${CONTEXT_ROOT}/g" ./test/Api.http
+sed -i.bak "s/MiniApi/${PROJ_NAME}/g" ./README.md
 # 删除备份文件
 find . -name '*.bak' -delete
 # 提交一下服务端文件
 git add *
-git add -f ./.gitlab-ci.yml
 git add -f ./.vscode/launch.json
 git add -f ./.vscode/tasks.json
 git commit --amend -m "Rename to ${COMPANY_NAME}.${PROJ_NAME}"
