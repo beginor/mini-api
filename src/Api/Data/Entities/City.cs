@@ -2,7 +2,6 @@
 using NHibernate.Mapping.Attributes;
 using Beginor.AppFx.Core;
 
-#nullable disable
 namespace Beginor.MiniApi.Data.Entities;
 
 /// <summary>Table, cities</summary>
@@ -15,7 +14,7 @@ public partial class City : BaseEntity<long> {
 
     /// <summary>name, varchar</summary>
     [Property(Name = nameof(Name), Column = "name", Type = "string", NotNull = false, Length = 64)]
-    public virtual string Name { get; set; }
+    public virtual string? Name { get; set; }
 
     /// <summary>population, int4</summary>
     [Property(Name = nameof(Population), Column = "population", Type = "int", NotNull = false)]
