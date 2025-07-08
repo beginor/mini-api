@@ -1,0 +1,115 @@
+Author: Beginor
+Module: MiniApi
+DataSource:
+  Name: DbTable
+  Parameters:
+    DbName: nhibernate
+    DbProvider: PostgreSql
+    ConnectionString: server=127.0.0.1;port=5432;database=nhibernate;user id=postgres;password=pgsql@17;
+    DbSchema: public
+Language: CSharp
+TemplateEngine:
+  Name: RazorCore
+  Root: Contributions/AppFx/NHibernate
+Output:
+  Type: File
+  Mode: Full # Incre 增量创建，如果存在则忽略； Full 全量创建，如果存在则重新创建
+  Path: ./
+NamingConverter:
+  Table:
+    Tokenizer:
+      Type: Default
+      Parameters:
+        IgnorePrefix: 'T_'
+        Delimiter: '_'
+    Converter:
+      Type: PascalSingular
+      Parameters: { }
+  View:
+    Tokenizer:
+      Type: Default
+      Parameters:
+        IgnorePrefix: 'V_'
+        Delimiter: '_'
+    Converter:
+      Type: Pascal
+  Column:
+    Tokenizer:
+      Type: Default
+      Parameters:
+        Delimiter: '_'
+    Converter:
+      Type: Pascal
+TableFilter:
+  IgnoreTables:
+    - aspnet_roles
+    - aspnet_users
+  IncludeTables:
+    - cities
+  IgnoreNoPKTable: true
+  IgnoreView: true
+
+Build:
+  Entities:
+    Type: Table
+    Module: Data
+    TemplateEngine:
+      Path: Entity.cshtml
+    Output:
+      Path: 'src/Api/Data/Entities'
+      Name: '{{Items.CurrentTable.ConvertedName}}'
+      Extension: '.cs'
+  Model:
+    Type: Table
+    Module: Models
+    TemplateEngine:
+      Path: Model.cshtml
+    Output:
+      Path: 'src/Api/Models'
+      Name: '{{Items.CurrentTable.ConvertedName}}Model'
+      Extension: '.cs'
+  IRepository:
+    Type: Table
+    Module: Data
+    TemplateEngine:
+      Path: IRepository.cshtml
+    Output:
+      Path: 'src/Api/Data/Repositories'
+      Name: 'I{{Items.CurrentTable.ConvertedName}}Repository'
+      Extension: '.cs'
+  Repository:
+    Type: Table
+    Module: Data
+    TemplateEngine:
+      Path: Repository.cshtml
+    Output:
+      Path: 'src/Api/Data/Repositories'
+      Name: '{{Items.CurrentTable.ConvertedName}}Repository'
+      Extension: '.cs'
+  RepositoryTest:
+    Type: Table
+    Module: Test
+    TemplateEngine:
+      Path: RepositoryTest.cshtml
+    Output:
+      Path: 'test/Test/Data'
+      Name: '{{Items.CurrentTable.ConvertedName}}RepositoryTest'
+      Extension: '.cs'
+  Api:
+    Type: Table
+    Module: Api
+    TemplateEngine:
+      Path: Api.cshtml
+    Output:
+      Path: 'src/Api/Controllers'
+      Name: '{{Items.CurrentTable.ConvertedName}}Controller'
+      Extension: '.cs'
+  ApiTest:
+    Type: Table
+    Module: Test
+    TemplateEngine:
+      Path: ApiTest.cshtml
+    Output:
+      Path: 'test/Test/Api'
+      Name: '{{Items.CurrentTable.ConvertedName}}ControllerTest'
+      Extension: '.cs'

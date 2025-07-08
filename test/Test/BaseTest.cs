@@ -1,0 +1,112 @@
+using System;
+using System.IO;
+using System.Security.Claims;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Hosting;
+using NUnit.Framework;
+using Beginor.AppFx.Logging.Log4net;
+
+namespace Beginor.MiniApi.Test;
+
+public abstract class BaseTest {
+
+    protected static IServiceProvider ServiceProvider { get; private set; }
+
+    protected BaseTest() {
+        if (ServiceProvider == null) {
+            ServiceProvider = InitServiceProvider();
+            Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+        }
+    }
+
+    private static IServiceProvider InitServiceProvider() {
+        var services = new ServiceCollection();
+        // setup test hosting env
+        var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+        var env = new TestHostEnvironment();
+        env.ContentRootPath = Path.Combine(baseDir);
+        services.AddSingleton<IWebHostEnvironment>(env);
+        // config files in config folder;
+        var configDir = Path.Combine(env.ContentRootPath, "config");
+        var config = new ConfigurationBuilder()
+            .AddJsonFile(Path.Combine(configDir, "appsettings.json"))
+            .AddJsonFile(
+                Path.Combine(configDir, $"appsettings.{env.EnvironmentName}.json")
+            )
+            .Build();
+        services.AddSingleton<IConfiguration>(config);
+        // startup and build services;
+        var startup = new Startup(config, env);
+        services.AddLogging(logging => {
+            logging.AddLog4net(Path.Combine(configDir, "log.config"));
+        });
+        startup.ConfigureServices(services);
+        return services.BuildServiceProvider(false);
+    }
+
+    protected JsonSerializerOptions GetTestJsonOption() {
+        var option = new JsonSerializerOptions {
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            WriteIndented = true
+        };
+        return option;
+    }
+
+    protected ClaimsPrincipal CreateTestPrincipal() {
+        var userName = "admin";
+
+        var identity = new ClaimsIdentity(new [] {
+            new Claim(ClaimTypes.NameIdentifier, "123456"),
+            new Claim(ClaimTypes.Name, userName),
+        }, "TokenAuth");
+
+        var principal = new ClaimsPrincipal(identity);
+        return principal;
+    }
+
+}
+
+public abstract class BaseTest<T> : BaseTest where T : class {
+
+    public T Target => ServiceProvider.GetRequiredService<T>();
+
+}
+
+public class TestHostEnvironment : IWebHostEnvironment {
+
+    public string EnvironmentName { get; set; } = "Development";
+
+    public string ApplicationName { get; set; } = "Beginor.MiniApi.Test";
+
+    public string WebRootPath { get; set; } = "wwwroot";
+
+    public IFileProvider WebRootFileProvider { get; set; }
+
+    public string ContentRootPath { get; set; }
+
+    public IFileProvider ContentRootFileProvider { get; set; }
+
+    public TestHostEnvironment() {
+        this.ContentRootPath = AppDomain.CurrentDomain.BaseDirectory;
+        this.WebRootPath = AppDomain.CurrentDomain.BaseDirectory;
+        this.WebRootFileProvider = new PhysicalFileProvider(WebRootPath);
+        this.ContentRootFileProvider = new PhysicalFileProvider(ContentRootPath);
+    }
+}
+
+[TestFixture]
+public class HostingEnvironmentTest {
+
+    [Test]
+    public void TestEnvironment() {
+        var target = new TestHostEnvironment();
+        Assert.That(target.IsProduction(), Is.False);
+        Assert.That(target.IsDevelopment());
+    }
+
+}

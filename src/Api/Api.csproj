@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyName>Beginor.MiniApi</AssemblyName>
+    <RootNamespace>Beginor.MiniApi</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Beginor.AppFx.Api" />
+    <PackageReference Include="Beginor.AppFx.Core" />
+    <PackageReference Include="Beginor.AppFx.DependencyInjection" />
+    <PackageReference Include="Beginor.AppFx.Logging.Log4net" />
+    <PackageReference Include="Beginor.AppFx.Repository.Hibernate" />
+    <PackageReference Include="Beginor.AspNetCore.Authentication.Token" />
+    <PackageReference Include="Beginor.AspNetCore.Middlewares.CustomHeader" />
+    <PackageReference Include="Beginor.AspNetCore.Middlewares.GzipStatic" />
+    <PackageReference Include="Beginor.AspNetCore.Middlewares.SpaFailback" />
+    <PackageReference Include="Dapper" />
+    <PackageReference Include="log4net" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="NHibernate" />
+    <PackageReference Include="NHibernate.Extensions.Npgsql" />
+    <PackageReference Include="NHibernate.Mapping.Attributes" />
+    <PackageReference Include="NHibernate.NetCore" />
+    <PackageReference Include="Npgsql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Repositories\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,14 @@
+@Api_HostAddress = http://localhost:5050
+@Api_Token = 1234567890
+
+### Get Weather Forecast
+GET {{Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+### Get cities
+GET {{Api_HostAddress}}/api/cities?$token={{Api_Token}}
+Accept: application/json
+
+### Get city by ID
+GET {{Api_HostAddress}}/api/cities/1581993880251010022?$token={{Api_Token}}
+Accept: application/json
