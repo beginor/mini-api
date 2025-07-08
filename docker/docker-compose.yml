@@ -1,0 +1,19 @@
+services:
+  app:
+    image: beginor/mini-api
+    ports:
+      - 8080:8080
+    volumes:
+      - ./config:/app/config
+      - ./log:/app/log
+      - ./cache:/app/cache
+    environment:
+      TZ: Asia/Shanghai
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ASPNETCORE_PATHBASE: /mini-api
+    restart: unless-stopped
+networks:
+  default:
+    external: true
+    name: compose
