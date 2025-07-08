@@ -27,7 +27,7 @@ public static class Program {
         if (section.Exists()) {
             builder.Services.Configure<KestrelServerOptions>(section);
         }
-        var startup = new Startup(builder.Configuration, builder.Environment);
+        var startup = new Startup.Startup(builder.Configuration, builder.Environment);
         startup.ConfigureServices(builder.Services);
         var app = builder.Build();
         startup.Configure(app);

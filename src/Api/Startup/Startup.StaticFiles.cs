@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
-namespace Beginor.MiniApi;
+namespace Beginor.MiniApi.Startup;
 
 partial class Startup {
 

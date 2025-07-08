@@ -41,7 +41,7 @@ public abstract class BaseTest {
             .Build();
         services.AddSingleton<IConfiguration>(config);
         // startup and build services;
-        var startup = new Startup(config, env);
+        var startup = new Startup.Startup(config, env);
         services.AddLogging(logging => {
             logging.AddLog4net(Path.Combine(configDir, "log.config"));
         });

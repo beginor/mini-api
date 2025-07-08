@@ -1,12 +1,11 @@
+using Beginor.AspNetCore.Authentication.Token;
+using Beginor.MiniApi.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Beginor.AspNetCore.Authentication.Token;
-using Beginor.MiniApi.Authorization;
 
-namespace Beginor.MiniApi;
+namespace Beginor.MiniApi.Startup;
 
 partial class Startup {
 

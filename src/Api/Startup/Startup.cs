@@ -1,4 +1,3 @@
-using System;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SysEnvironment = System.Environment;
 
-namespace Beginor.MiniApi;
+namespace Beginor.MiniApi.Startup;
 
 public partial class Startup(IConfiguration config, IWebHostEnvironment env) {
 

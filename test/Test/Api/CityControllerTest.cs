@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Beginor.MiniApi.Api.Controllers;
+using Beginor.MiniApi.Controllers;
 
 namespace Beginor.MiniApi.Test.Api;
 

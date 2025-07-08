@@ -9,7 +9,7 @@ using Beginor.AppFx.Core;
 using Beginor.MiniApi.Models;
 using Beginor.MiniApi.Data.Repositories;
 
-namespace Beginor.MiniApi.Api.Controllers;
+namespace Beginor.MiniApi.Controllers;
 
 /// <summary>Table, cities 服务接口</summary>
 [ApiController]

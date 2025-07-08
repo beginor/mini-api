@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Beginor.MiniApi;
+namespace Beginor.MiniApi.Startup;
 
 partial class Startup {
 

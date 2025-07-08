@@ -9,7 +9,7 @@ using NHibernate.Mapping.Attributes;
 using NHibernate.NetCore;
 using NHEnv = NHibernate.Cfg.Environment;
 
-namespace Beginor.MiniApi;
+namespace Beginor.MiniApi.Startup;
 
 partial class Startup {
 
