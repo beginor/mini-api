@@ -19,6 +19,9 @@ public class TokenEventsHandler {
             var claims = new List<Claim> {
                 new Claim(ClaimTypes.NameIdentifier, "1"),
                 new Claim(ClaimTypes.Name, "admin"),
+                new Claim(ClaimTypes.Email, "admin@localhost.com"),
+                new Claim(ClaimTypes.Role, "users"),
+                new Claim(ClaimTypes.Role, "admins"),
                 new Claim(AppClaimTypes.Privilege, "cities.read"),
                 new Claim(AppClaimTypes.Privilege, "cities.read_by_id"),
                 new Claim(AppClaimTypes.Privilege, "cities.create"),
