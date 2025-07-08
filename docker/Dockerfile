@@ -4,11 +4,6 @@ ENV ASPNETCORE_PATHBASE=/mini-api \
     TZ=Asia/Shanghai \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8
-RUN apt-get update && \
-    apt-get install -y fonts-freefont-otf fontconfig && \
-    fc-cache -f -v && \
-    apt-get autoremove -y && \
-    rm -rf /var/lib/apt/lists/*
 ADD dist /app
 VOLUME [ "/app/config", "/app/log", "/app/wwwroot" ]
 WORKDIR /app
