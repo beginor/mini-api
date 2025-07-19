@@ -25,9 +25,9 @@
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="9.0.6" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageVersion Include="NHibernate" Version="5.5.2" />
-    <PackageVersion Include="NHibernate.Extensions.Npgsql" Version="9.0.3" />
     <PackageVersion Include="NHibernate.Mapping.Attributes" Version="5.1.0" />
-    <PackageVersion Include="NHibernate.NetCore" Version="9.0.3" />
+    <PackageVersion Include="NHibernate.Extensions.Npgsql" Version="9.0.5" />
+    <PackageVersion Include="NHibernate.Extensions.NetCore" Version="9.0.5" />
     <PackageVersion Include="Npgsql" Version="9.0.3" />
     <PackageVersion Include="NUnit" Version="4.3.2" />
     <PackageVersion Include="NUnit3TestAdapter" Version="5.0.0" />

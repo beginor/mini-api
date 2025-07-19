@@ -4,9 +4,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using NHibernate.Cfg;
 using NHibernate.Mapping.Attributes;
-using NHibernate.NetCore;
+using NHibernate.Extensions.NetCore;
 using NHEnv = NHibernate.Cfg.Environment;
 
 namespace Beginor.MiniApi.Startup;
@@ -25,7 +26,8 @@ partial class Startup {
     }
 
     private void ConfigureHibernate(WebApplication app, IWebHostEnvironment env) {
-        // do nothing know
+        var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
+        loggerFactory.UseAsHibernateLoggerFactory();
     }
 
 }

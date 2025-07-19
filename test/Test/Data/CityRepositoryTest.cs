@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using NHibernate;
-using NHibernate.NetCore;
+using NHibernate.Extensions.NetCore;
 using NUnit.Framework;
 using Beginor.MiniApi.Data.Entities;
 using Beginor.MiniApi.Data.Repositories;
