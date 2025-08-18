@@ -8,11 +8,17 @@ namespace Beginor.MiniApi.Startup;
 partial class Startup {
 
     private static void ConfigureAutoMapperServices(IServiceCollection services, IWebHostEnvironment env) {
-        var mapperConfig = new MapperConfiguration(configure => {
-            configure.AddMaps(typeof(Startup).Assembly);
-        });
-        var mapper = mapperConfig.CreateMapper();
-        services.AddSingleton(mapper);
+        services.AddAutoMapper(
+            configure => {
+                configure.LicenseKey = null;
+                configure.AllowNullCollections = false;
+                configure.AllowNullDestinationValues = false;
+            },
+            [
+                typeof(Startup).Assembly,
+            ],
+            ServiceLifetime.Singleton
+        );
     }
 
     private static void ConfigureAutoMapper(WebApplication app, IWebHostEnvironment env) {
