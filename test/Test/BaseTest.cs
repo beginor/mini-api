@@ -36,9 +36,11 @@ public abstract class BaseTest {
         var services = new ServiceCollection();
         // setup test hosting env
         var baseDir = AppDomain.CurrentDomain.BaseDirectory;
-        var env = new TestHostEnvironment();
-        env.ContentRootPath = Path.Combine(baseDir);
+        var env = new TestHostEnvironment {
+            ContentRootPath = Path.Combine(baseDir)
+        };
         services.AddSingleton<IWebHostEnvironment>(env);
+        services.AddSingleton<IHostEnvironment>(env);
         // config files in config folder;
         var configDir = Path.Combine(env.ContentRootPath, "config");
         var config = new ConfigurationBuilder()
@@ -121,7 +123,7 @@ public class HostingEnvironmentTest {
     public void TestEnvironment() {
         var target = new TestHostEnvironment();
         Assert.That(target.IsProduction(), Is.False);
-        Assert.That(target.IsDevelopment());
+        Assert.That(target.IsDevelopment(), Is.True);
     }
 
 }
