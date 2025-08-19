@@ -15,16 +15,24 @@ namespace Beginor.MiniApi.Test;
 
 public abstract class BaseTest {
 
-    protected static IServiceProvider ServiceProvider { get; private set; }
+    protected IServiceProvider ServiceProvider { get; private set; } = null!;
+    protected JsonSerializerOptions JsonSerializerOptions { get; private set; } = null!;
 
     protected BaseTest() {
-        if (ServiceProvider == null) {
-            ServiceProvider = InitServiceProvider();
-            Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
-        }
+        InitTest();
     }
 
-    private static IServiceProvider InitServiceProvider() {
+    private void InitTest() {
+        InitDapper();
+        this.JsonSerializerOptions = this.InitTestJsonOptions();
+        this.ServiceProvider = this.InitServiceProvider();
+    }
+
+    protected virtual void InitDapper() {
+        Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+    }
+
+    protected virtual IServiceProvider InitServiceProvider() {
         var services = new ServiceCollection();
         // setup test hosting env
         var baseDir = AppDomain.CurrentDomain.BaseDirectory;
@@ -40,21 +48,28 @@ public abstract class BaseTest {
             )
             .Build();
         services.AddSingleton<IConfiguration>(config);
-        // startup and build services;
-        var startup = new Startup.Startup(config, env);
         services.AddLogging(logging => {
             logging.AddLog4net(Path.Combine(configDir, "log.config"));
         });
-        startup.ConfigureServices(services);
+        this.InitTestServices(env, services, config);
         return services.BuildServiceProvider(false);
     }
 
-    protected JsonSerializerOptions GetTestJsonOption() {
-        var option = new JsonSerializerOptions {
+    protected virtual void InitTestServices(
+        IWebHostEnvironment environment,
+        IServiceCollection services,
+        IConfiguration configuration
+    ) {
+        // startup and build services;
+        var startup = new Startup.Startup(configuration, environment);
+        startup.ConfigureServices(services);
+    }
+
+    protected virtual JsonSerializerOptions InitTestJsonOptions() {
+        return new JsonSerializerOptions {
             Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
             WriteIndented = true
         };
-        return option;
     }
 
     protected ClaimsPrincipal CreateTestPrincipal() {
@@ -73,7 +88,7 @@ public abstract class BaseTest {
 
 public abstract class BaseTest<T> : BaseTest where T : class {
 
-    public T Target => ServiceProvider.GetRequiredService<T>();
+    protected T Target => ServiceProvider.GetRequiredService<T>();
 
 }
 
@@ -83,7 +98,7 @@ public class TestHostEnvironment : IWebHostEnvironment {
 
     public string ApplicationName { get; set; } = "Beginor.MiniApi.Test";
 
-    public string WebRootPath { get; set; } = "wwwroot";
+    public string WebRootPath { get; set; }
 
     public IFileProvider WebRootFileProvider { get; set; }
 
