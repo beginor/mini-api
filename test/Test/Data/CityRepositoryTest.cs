@@ -12,7 +12,7 @@ namespace Beginor.MiniApi.Test.Data;
 
 /// <summary>Table, cities仓储测试</summary>
 [TestFixture]
-public class CityRepositoryTest : BaseTest<ICityRepository> {
+public class CityRepositoryTest : BaseTest<CityRepository> {
 
     [Test]
     public void _01_CanResolveTarget() {

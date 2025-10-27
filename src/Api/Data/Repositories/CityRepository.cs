@@ -17,8 +17,7 @@ namespace Beginor.MiniApi.Data.Repositories;
 /// <summary>Table, cities仓储实现</summary>
 public partial class CityRepository(
     ISession session, IMapper mapper
-) : HibernateRepository<City, CityModel, long>(session, mapper),
-    ICityRepository {
+) : HibernateRepository<City, CityModel, long>(session, mapper) {
 
     /// <summary>搜索 Table, cities ，返回分页结果。</summary>
     public async Task<PaginatedResponseModel<CityModel>> SearchAsync(

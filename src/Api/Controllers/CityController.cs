@@ -16,7 +16,7 @@ namespace Beginor.MiniApi.Controllers;
 [Route("api/cities")]
 public class CityController(
     ILogger<CityController> logger,
-    ICityRepository repository
+    CityRepository repository
 ) : Controller {
 
     /// <summary>搜索 Table, cities , 分页返回结果</summary>

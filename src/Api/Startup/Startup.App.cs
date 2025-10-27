@@ -9,7 +9,7 @@ partial class Startup {
 
     private void ConfigureAppServices(IServiceCollection services, IWebHostEnvironment env) {
         services.AddDistributedMemoryCache();
-        services.AddServiceWithDefaultImplements(
+        services.AddServices(
             typeof(Startup).Assembly,
             t => t.Name.EndsWith("Repository"),
             ServiceLifetime.Scoped
