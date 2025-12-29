@@ -1,4 +1,3 @@
-using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,9 +8,8 @@ namespace Beginor.MiniApi.Startup;
 
 public partial class Startup(IConfiguration config, IWebHostEnvironment env) {
 
-    private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(
-        MethodBase.GetCurrentMethod()!.DeclaringType!
-    );
+    // ReSharper disable once InconsistentNaming
+    private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()!.DeclaringType!);
 
     public void ConfigureServices(IServiceCollection services) {
         logger.Info("Configuring services");
