@@ -8,7 +8,7 @@ namespace Beginor.MiniApi.Data;
 public class ModelMapping : AutoMapper.Profile {
 
     public ModelMapping() {
-        CreateMap<City, CityModel>().ReverseMap();
+        CreateMap<CityEntity, CityModel>().ReverseMap();
     }
 
 }

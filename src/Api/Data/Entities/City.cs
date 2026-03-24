@@ -6,7 +6,7 @@ namespace Beginor.MiniApi.Data.Entities;
 
 /// <summary>Table, cities</summary>
 [Class(Schema = "public", Table = "cities")]
-public partial class City : BaseEntity<long> {
+public partial class CityEntity : BaseEntity<long> {
 
     /// <summary>id, int8</summary>
     [Id(Name = nameof(Id), Column = "id", Type = "long", Generator = "trigger-identity")]

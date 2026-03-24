@@ -17,14 +17,14 @@ namespace Beginor.MiniApi.Data.Repositories;
 /// <summary>Table, cities仓储实现</summary>
 public partial class CityRepository(
     ISession session, IMapper mapper
-) : HibernateRepository<City, CityModel, long>(session, mapper) {
+) : HibernateRepository<CityEntity, CityModel, long>(session, mapper) {
 
     /// <summary>搜索 Table, cities ，返回分页结果。</summary>
     public async Task<PaginatedResponseModel<CityModel>> SearchAsync(
         CitySearchModel model,
         CancellationToken token = default
     ) {
-        var query = Session.Query<City>();
+        var query = Session.Query<CityEntity>();
         // todo: 添加自定义查询；
         var total = await query.LongCountAsync(token);
         var data = await query.OrderByDescending(e => e.Id)
