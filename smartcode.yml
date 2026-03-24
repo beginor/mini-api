@@ -57,7 +57,7 @@ Build:
       Path: Entity.cshtml
     Output:
       Path: 'src/Api/Data/Entities'
-      Name: '{{Items.CurrentTable.ConvertedName}}'
+      Name: '{{Items.CurrentTable.ConvertedName}}Entity'
       Extension: '.cs'
   Model:
     Type: Table
