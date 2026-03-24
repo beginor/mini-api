@@ -17,8 +17,10 @@ public class TokenEventsHandler {
         if (token == "1234567890") {
             // 模拟一个用户
             var claims = new List<Claim> {
-                new Claim(ClaimTypes.NameIdentifier, "1"),
+                new Claim(ClaimTypes.NameIdentifier, "1234567890"),
                 new Claim(ClaimTypes.Name, "admin"),
+                new Claim(ClaimTypes.GivenName, "管理员"),
+                new Claim(ClaimTypes.Surname, ""),
                 new Claim(ClaimTypes.Email, "admin@localhost.com"),
                 new Claim(ClaimTypes.Role, "users"),
                 new Claim(ClaimTypes.Role, "admins"),
